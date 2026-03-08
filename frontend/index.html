@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Food Delivery App</title>
+</head>
+<body>
+  <h1>Food Menu</h1>
+  <button onclick="loadFoods()">Load Foods</button>
+  <ul id="food-list"></ul>
+
+  <script>
+    function loadFoods() {
+      fetch("http://localhost:5000/foods")
+        .then(response => response.json())
+        .then(data => {
+          const list = document.getElementById("food-list");
+          list.innerHTML = "";
+          data.forEach(food => {
+            const li = document.createElement("li");
+            li.textContent = `${food.name} - $${food.price}`;
+            list.appendChild(li);
+          });
+        });
+    }
+  </script>
+</body>
+</html>
